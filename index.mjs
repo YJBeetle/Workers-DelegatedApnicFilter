@@ -67,8 +67,13 @@ async function handleRequest(request) {
 
     if (pathname == '/help') {
         return new Response(
-            "<h1>TODO</h1",
-            { headers: { ...corsHeaders, "content-type": "text/html" } }
+            `args:
+type: "ipv4" "ipv6" "asn"
+country: eg: "CN"
+format: "json" "text"
+eg: /?type=ipv4&country=CN&format=text
+`,
+            { headers: { ...corsHeaders, "content-type": "text/plain" } }
         )
     }
 
