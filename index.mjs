@@ -2,7 +2,7 @@ async function handleRequestAndProcess(args) {
     const {
         type = 'ipv4', // eg: "ipv4" "ipv6" "asn"
         country = null, // eg: "CN"
-        format = 'text', // eg: "json" "text" "html"
+        format = 'text', // eg: "json" "text"
     } = args
 
     const apnicRes = await fetch("http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest");
@@ -23,14 +23,6 @@ async function handleRequestAndProcess(args) {
         return { ret: JSON.stringify(retData), contentType: "application/json" }
     else if (format === 'text')
         return { ret: retData.join('\n'), contentType: "text/plain" }
-    else if (format === 'html')
-        return {
-            ret: `<table border="1">` +
-                `<thead><tr><th>key</th><th>label</th><th>locale</th></tr></thead>` +
-                `<tbody>${retData.map(e => `<tr><td>${e}</td></tr>`).join('')}</tbody>` +
-                `</table>`,
-            contentType: "text/html; charset=UTF-8"
-        }
     else
         return { ret: "Error", contentType: "text/plain" }
 }
